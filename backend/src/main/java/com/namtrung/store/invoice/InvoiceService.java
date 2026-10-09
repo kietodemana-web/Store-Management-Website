@@ -1,5 +1,6 @@
 package com.namtrung.store.invoice;
 
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -15,11 +16,12 @@ public class InvoiceService {
     public List<Invoice> findAll() { return repo.findAll(); }
 
     public Invoice findById(Long id) {
+        if (id == null) throw new IllegalArgumentException("Invoice id must not be null");
         return repo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Invoice not found: " + id));
     }
 
-    public Invoice save(Invoice inv) { return repo.save(inv); }
+    public @NonNull Invoice save(@NonNull Invoice inv) { return repo.save(inv); }
 
     public Invoice update(Long id, Invoice data) {
         Invoice inv = findById(id);
@@ -32,5 +34,8 @@ public class InvoiceService {
         return repo.save(inv);
     }
 
-    public void delete(Long id) { repo.deleteById(id); }
+    public void delete(Long id) {
+        if (id == null) throw new IllegalArgumentException("Invoice id must not be null");
+        repo.deleteById(id);
+    }
 }

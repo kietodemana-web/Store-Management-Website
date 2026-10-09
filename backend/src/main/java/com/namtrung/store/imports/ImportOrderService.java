@@ -1,7 +1,8 @@
 package com.namtrung.store.imports;
+import java.util.List;
+import java.util.Objects;
 
 import org.springframework.stereotype.Service;
-import java.util.List;
 
 @Service
 public class ImportOrderService {
@@ -15,11 +16,12 @@ public class ImportOrderService {
     public List<ImportOrder> findAll() { return repo.findAll(); }
 
     public ImportOrder findById(Long id) {
+        if (id == null) throw new IllegalArgumentException("ImportOrder id must not be null");
         return repo.findById(id)
                 .orElseThrow(() -> new RuntimeException("ImportOrder not found: " + id));
     }
 
-    public ImportOrder save(ImportOrder o) { return repo.save(o); }
+    public ImportOrder save(ImportOrder o) { return repo.save(Objects.requireNonNull(o, "ImportOrder must not be null")); }
 
     public ImportOrder update(Long id, ImportOrder data) {
         ImportOrder o = findById(id);
@@ -31,5 +33,8 @@ public class ImportOrderService {
         return repo.save(o);
     }
 
-    public void delete(Long id) { repo.deleteById(id); }
+    public void delete(Long id) {
+        if (id == null) throw new IllegalArgumentException("ImportOrder id must not be null");
+        repo.deleteById(id);
+    }
 }

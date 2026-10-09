@@ -1,7 +1,9 @@
 package com.namtrung.store.exports;
 
-import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Objects;
+
+import org.springframework.stereotype.Service;
 
 @Service
 public class ExportOrderService {
@@ -15,11 +17,13 @@ public class ExportOrderService {
     public List<ExportOrder> findAll() { return repo.findAll(); }
 
     public ExportOrder findById(Long id) {
-        return repo.findById(id)
+        return repo.findById(Objects.requireNonNull(id, "ExportOrder id must not be null"))
                 .orElseThrow(() -> new RuntimeException("ExportOrder not found: " + id));
     }
 
-    public ExportOrder save(ExportOrder o) { return repo.save(o); }
+    public ExportOrder save(ExportOrder o) {
+        return repo.save(Objects.requireNonNull(o, "ExportOrder must not be null"));
+    }
 
     public ExportOrder update(Long id, ExportOrder data) {
         ExportOrder o = findById(id);
@@ -31,5 +35,8 @@ public class ExportOrderService {
         return repo.save(o);
     }
 
-    public void delete(Long id) { repo.deleteById(id); }
+    public void delete(Long id) {
+        if (id == null) throw new IllegalArgumentException("ExportOrder id must not be null");
+        repo.deleteById(id);
+    }
 }
