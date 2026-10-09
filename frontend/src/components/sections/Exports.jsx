@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { api } from '../../api';
+import { formatAmount, formatDate, formatCode } from '../../utils';
 
 export default function Exports() {
   const [exports, setExports] = useState([]);
@@ -7,20 +8,6 @@ export default function Exports() {
   useEffect(() => {
     api.getExports().then(setExports).catch(console.error);
   }, []);
-
-  function formatAmount(val) {
-    if (val == null) return '--';
-    return val.toLocaleString('vi-VN') + 'đ';
-  }
-
-  function formatDate(val) {
-    if (!val) return '--';
-    return new Date(val).toLocaleDateString('vi-VN');
-  }
-
-  function formatCode(id) {
-    return '#PX' + String(id).padStart(4, '0');
-  }
 
   return (
     <section className="section active" id="exports">
@@ -48,7 +35,7 @@ export default function Exports() {
           <tbody>
             {exports.map(o => (
               <tr key={o.id}>
-                <td>{formatCode(o.id)}</td>
+                <td>{formatCode('PX', o.id)}</td>
                 <td>{o.customerName}</td>
                 <td>{formatDate(o.exportDate)}</td>
                 <td>{o.productName}</td>

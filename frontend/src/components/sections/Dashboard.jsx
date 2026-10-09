@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { api } from '../../api';
+import { formatAmount, formatDate, formatCode } from '../../utils';
 
 export default function Dashboard() {
   const [products, setProducts] = useState([]);
@@ -7,24 +8,10 @@ export default function Dashboard() {
   const [imports, setImports] = useState([]);
 
   useEffect(() => {
-    api.getProducts().then(setProducts).catch(console.error);
-    api.getInvoices().then(setInvoices).catch(console.error);
-    api.getImports().then(setImports).catch(console.error);
+    Promise.all([api.getProducts(), api.getInvoices(), api.getImports()])
+      .then(([p, i, m]) => { setProducts(p); setInvoices(i); setImports(m); })
+      .catch(console.error);
   }, []);
-
-  function formatAmount(val) {
-    if (val == null) return '--';
-    return val.toLocaleString('vi-VN') + 'đ';
-  }
-
-  function formatDate(val) {
-    if (!val) return '--';
-    return new Date(val).toLocaleDateString('vi-VN');
-  }
-
-  function formatCode(id) {
-    return '#HD' + String(id).padStart(4, '0');
-  }
 
   const revenue = invoices.filter(i => i.status === 'PAID').reduce((s, x) => s + x.totalAmount, 0);
   const lowStock = products.filter(p => p.stock > 0 && p.stock <= 10);
@@ -64,7 +51,7 @@ export default function Dashboard() {
             <tbody>
               {recentInvoices.map(inv => (
                 <tr key={inv.id}>
-                  <td>{formatCode(inv.id)}</td>
+                  <td>{formatCode('HD', inv.id)}</td>
                   <td>{inv.customerName}</td>
                   <td>{inv.productName}</td>
                   <td>{formatAmount(inv.totalAmount)}</td>
@@ -95,5 +82,4 @@ export default function Dashboard() {
     </section>
   );
 }
-
 

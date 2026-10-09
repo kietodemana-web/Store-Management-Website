@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { api } from '../../api';
+import { formatAmount, formatDate, formatCode } from '../../utils';
 
 export default function Invoices() {
   const [invoices, setInvoices] = useState([]);
@@ -7,20 +8,6 @@ export default function Invoices() {
   useEffect(() => {
     api.getInvoices().then(setInvoices).catch(console.error);
   }, []);
-
-  function formatAmount(val) {
-    if (val == null) return '--';
-    return val.toLocaleString('vi-VN') + 'đ';
-  }
-
-  function formatDate(val) {
-    if (!val) return '--';
-    return new Date(val).toLocaleDateString('vi-VN');
-  }
-
-  function formatCode(id) {
-    return '#HD' + String(id).padStart(4, '0');
-  }
 
   const unpaid = invoices.filter(i => i.status === 'UNPAID').length;
   const revenue = invoices.filter(i => i.status === 'PAID').reduce((s, x) => s + x.totalAmount, 0);
@@ -51,7 +38,7 @@ export default function Invoices() {
           <tbody>
             {invoices.map(inv => (
               <tr key={inv.id}>
-                <td>{formatCode(inv.id)}</td>
+                <td>{formatCode('HD', inv.id)}</td>
                 <td>{inv.customerName}</td>
                 <td>{formatDate(inv.invoiceDate)}</td>
                 <td>{inv.productName}</td>

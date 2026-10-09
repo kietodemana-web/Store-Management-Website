@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { api } from '../../api';
+import { formatAmount, formatDate, formatCode } from '../../utils';
 
 export default function Imports() {
   const [imports, setImports] = useState([]);
@@ -7,20 +8,6 @@ export default function Imports() {
   useEffect(() => {
     api.getImports().then(setImports).catch(console.error);
   }, []);
-
-  function formatAmount(val) {
-    if (val == null) return '--';
-    return val.toLocaleString('vi-VN') + 'đ';
-  }
-
-  function formatDate(val) {
-    if (!val) return '--';
-    return new Date(val).toLocaleDateString('vi-VN');
-  }
-
-  function formatCode(id) {
-    return '#PN' + String(id).padStart(4, '0');
-  }
 
   return (
     <section className="section active" id="imports">
@@ -48,7 +35,7 @@ export default function Imports() {
           <tbody>
             {imports.map(o => (
               <tr key={o.id}>
-                <td>{formatCode(o.id)}</td>
+                <td>{formatCode('PN', o.id)}</td>
                 <td>{o.supplier}</td>
                 <td>{formatDate(o.importDate)}</td>
                 <td>{o.productName}</td>

@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react'
-
 const BREADCRUMB = {
   dashboard: 'Tổng Quan',
   products:  'Danh Sách Sản Phẩm',
@@ -10,11 +8,7 @@ const BREADCRUMB = {
 }
 
 export default function Header({ onToggle, activeSection }) {
-  const [date, setDate] = useState('')
-
-  useEffect(() => {
-    setDate(new Date().toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' }))
-  }, [])
+  const date = new Date().toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' })
 
   return (
     <header className="header">

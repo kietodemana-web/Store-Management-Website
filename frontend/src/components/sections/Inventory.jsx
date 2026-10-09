@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { api } from '../../api';
+import { getStockStatus } from '../../utils';
 
 export default function Inventory() {
   const [products, setProducts] = useState([]);
@@ -12,13 +13,6 @@ export default function Inventory() {
   const inStock = products.filter(p => p.stock > 10).length;
   const low = products.filter(p => p.stock > 0 && p.stock <= 10).length;
   const out = products.filter(p => p.stock <= 0).length;
-
-  function getStatus(stock) {
-    if (stock <= 0) return <span className="status danger">Hết hàng</span>;
-    if (stock <= 5) return <span className="status danger">Sắp hết</span>;
-    if (stock <= 10) return <span className="status warning">Thấp</span>;
-    return <span className="status done">Bình thường</span>;
-  }
 
   return (
     <section className="section active" id="inventory">
@@ -51,7 +45,7 @@ export default function Inventory() {
                 <td>{p.name}</td>
                 <td>{p.category}</td>
                 <td>{p.stock}</td>
-                <td>{getStatus(p.stock)}</td>
+                <td>{getStockStatus(p.stock)}</td>
               </tr>
             ))}
           </tbody>

@@ -1,27 +1,38 @@
-const BASE = 'http://localhost:8080/api';
+const JSON_HEADERS = { 'Content-Type': 'application/json' };
+
+const parse = async (r) => {
+  if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
+  const text = await r.text();
+  return text ? JSON.parse(text) : null;
+};
+
+const get = (url) => fetch(url).then(parse);
+const post = (url, data) => fetch(url, { method: 'POST', headers: JSON_HEADERS, body: JSON.stringify(data) }).then(parse);
+const put = (url, data) => fetch(url, { method: 'PUT', headers: JSON_HEADERS, body: JSON.stringify(data) }).then(parse);
+const del = (url) => fetch(url, { method: 'DELETE' }).then(parse);
 
 export const api = {
   // Products
-  getProducts:    () => fetch(`${BASE}/products`).then(r => r.json()),
-  createProduct:  (data) => fetch(`${BASE}/products`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }).then(r => r.json()),
-  updateProduct:  (id, data) => fetch(`${BASE}/products/${id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }).then(r => r.json()),
-  deleteProduct:  (id) => fetch(`${BASE}/products/${id}`, { method: 'DELETE' }),
+  getProducts:   ()         => get('/api/products'),
+  createProduct: (data)     => post('/api/products', data),
+  updateProduct: (id, data)  => put(`/api/products/${id}`, data),
+  deleteProduct: (id)        => del(`/api/products/${id}`),
 
   // Imports
-  getImports:     () => fetch(`${BASE}/imports`).then(r => r.json()),
-  createImport:   (data) => fetch(`${BASE}/imports`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }).then(r => r.json()),
-  updateImport:   (id, data) => fetch(`${BASE}/imports/${id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }).then(r => r.json()),
-  deleteImport:   (id) => fetch(`${BASE}/imports/${id}`, { method: 'DELETE' }),
+  getImports:   ()          => get('/api/imports'),
+  createImport: (data)      => post('/api/imports', data),
+  updateImport: (id, data)  => put(`/api/imports/${id}`, data),
+  deleteImport: (id)        => del(`/api/imports/${id}`),
 
   // Exports
-  getExports:     () => fetch(`${BASE}/exports`).then(r => r.json()),
-  createExport:   (data) => fetch(`${BASE}/exports`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }).then(r => r.json()),
-  updateExport:   (id, data) => fetch(`${BASE}/exports/${id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }).then(r => r.json()),
-  deleteExport:   (id) => fetch(`${BASE}/exports/${id}`, { method: 'DELETE' }),
+  getExports:   ()          => get('/api/exports'),
+  createExport: (data)      => post('/api/exports', data),
+  updateExport: (id, data)  => put(`/api/exports/${id}`, data),
+  deleteExport: (id)        => del(`/api/exports/${id}`),
 
   // Invoices
-  getInvoices:    () => fetch(`${BASE}/invoices`).then(r => r.json()),
-  createInvoice:  (data) => fetch(`${BASE}/invoices`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }).then(r => r.json()),
-  updateInvoice:  (id, data) => fetch(`${BASE}/invoices/${id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }).then(r => r.json()),
-  deleteInvoice:  (id) => fetch(`${BASE}/invoices/${id}`, { method: 'DELETE' }),
+  getInvoices:   ()         => get('/api/invoices'),
+  createInvoice: (data)     => post('/api/invoices', data),
+  updateInvoice: (id, data) => put(`/api/invoices/${id}`, data),
+  deleteInvoice: (id)       => del(`/api/invoices/${id}`),
 };

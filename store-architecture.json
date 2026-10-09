@@ -1,0 +1,628 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Store Management",
+    "subtitle": "React + Spring Boot + SQL Server",
+    "output": "store-architecture.html",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "ff",
+        "label": "Frontend",
+        "focus": [
+          "browser",
+          "vite",
+          "app",
+          "sidebar",
+          "sections",
+          "apiclient"
+        ],
+        "note": "Browser to API"
+      },
+      {
+        "id": "bf",
+        "label": "Backend",
+        "focus": [
+          "apiclient",
+          "webconfig",
+          "springboot",
+          "productctrl",
+          "productsvc",
+          "productrepo",
+          "productentity"
+        ],
+        "note": "Controller to Entity"
+      },
+      {
+        "id": "dl",
+        "label": "Data",
+        "focus": [
+          "productentity",
+          "importentity",
+          "exportentity",
+          "invoiceentity",
+          "db"
+        ],
+        "note": "4 Entities to SQL Server"
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "browser",
+      "type": "external",
+      "label": "Browser",
+      "sublabel": "User",
+      "pos": [
+        20,
+        280
+      ],
+      "size": [
+        110,
+        56
+      ],
+      "tag": ":5173"
+    },
+    {
+      "id": "vite",
+      "type": "frontend",
+      "label": "Vite",
+      "sublabel": "React 18",
+      "pos": [
+        160,
+        280
+      ],
+      "size": [
+        110,
+        56
+      ],
+      "tag": ":5173"
+    },
+    {
+      "id": "app",
+      "type": "frontend",
+      "label": "App.jsx",
+      "sublabel": "State+Router",
+      "pos": [
+        300,
+        280
+      ],
+      "size": [
+        110,
+        56
+      ]
+    },
+    {
+      "id": "sidebar",
+      "type": "frontend",
+      "label": "Sidebar",
+      "sublabel": "Navigation",
+      "pos": [
+        300,
+        150
+      ],
+      "size": [
+        110,
+        56
+      ]
+    },
+    {
+      "id": "sections",
+      "type": "frontend",
+      "label": "Sections",
+      "sublabel": "6 pages",
+      "pos": [
+        300,
+        430
+      ],
+      "size": [
+        110,
+        56
+      ]
+    },
+    {
+      "id": "apiclient",
+      "type": "frontend",
+      "label": "api.js",
+      "sublabel": "fetch()",
+      "pos": [
+        440,
+        280
+      ],
+      "size": [
+        110,
+        56
+      ]
+    },
+    {
+      "id": "webconfig",
+      "type": "security",
+      "label": "WebConfig",
+      "sublabel": "CORS",
+      "pos": [
+        580,
+        150
+      ],
+      "size": [
+        110,
+        56
+      ]
+    },
+    {
+      "id": "springboot",
+      "type": "backend",
+      "label": "Spring Boot",
+      "sublabel": "StoreApp",
+      "pos": [
+        580,
+        280
+      ],
+      "size": [
+        110,
+        56
+      ],
+      "tag": ":8080"
+    },
+    {
+      "id": "productctrl",
+      "type": "backend",
+      "label": "ProductCtrl",
+      "sublabel": "@RestCtrl",
+      "pos": [
+        740,
+        80
+      ],
+      "size": [
+        110,
+        44
+      ],
+      "tag": "/api/products"
+    },
+    {
+      "id": "productsvc",
+      "type": "backend",
+      "label": "ProductSvc",
+      "sublabel": "@Service",
+      "pos": [
+        890,
+        80
+      ],
+      "size": [
+        100,
+        44
+      ]
+    },
+    {
+      "id": "productrepo",
+      "type": "backend",
+      "label": "ProductRepo",
+      "sublabel": "JpaRepo",
+      "pos": [
+        1030,
+        80
+      ],
+      "size": [
+        100,
+        44
+      ]
+    },
+    {
+      "id": "productentity",
+      "type": "database",
+      "label": "Product",
+      "sublabel": "products",
+      "pos": [
+        1170,
+        80
+      ],
+      "size": [
+        100,
+        44
+      ]
+    },
+    {
+      "id": "importctrl",
+      "type": "backend",
+      "label": "ImportCtrl",
+      "sublabel": "@RestCtrl",
+      "pos": [
+        740,
+        165
+      ],
+      "size": [
+        110,
+        44
+      ],
+      "tag": "/api/imports"
+    },
+    {
+      "id": "importsvc",
+      "type": "backend",
+      "label": "ImportSvc",
+      "sublabel": "@Service",
+      "pos": [
+        890,
+        165
+      ],
+      "size": [
+        100,
+        44
+      ]
+    },
+    {
+      "id": "importrepo",
+      "type": "backend",
+      "label": "ImportRepo",
+      "sublabel": "JpaRepo",
+      "pos": [
+        1030,
+        165
+      ],
+      "size": [
+        100,
+        44
+      ]
+    },
+    {
+      "id": "importentity",
+      "type": "database",
+      "label": "ImportOrder",
+      "sublabel": "import_orders",
+      "pos": [
+        1170,
+        165
+      ],
+      "size": [
+        100,
+        44
+      ]
+    },
+    {
+      "id": "exportctrl",
+      "type": "backend",
+      "label": "ExportCtrl",
+      "sublabel": "@RestCtrl",
+      "pos": [
+        740,
+        250
+      ],
+      "size": [
+        110,
+        44
+      ],
+      "tag": "/api/exports"
+    },
+    {
+      "id": "exportsvc",
+      "type": "backend",
+      "label": "ExportSvc",
+      "sublabel": "@Service",
+      "pos": [
+        890,
+        250
+      ],
+      "size": [
+        100,
+        44
+      ]
+    },
+    {
+      "id": "exportrepo",
+      "type": "backend",
+      "label": "ExportRepo",
+      "sublabel": "JpaRepo",
+      "pos": [
+        1030,
+        250
+      ],
+      "size": [
+        100,
+        44
+      ]
+    },
+    {
+      "id": "exportentity",
+      "type": "database",
+      "label": "ExportOrder",
+      "sublabel": "export_orders",
+      "pos": [
+        1170,
+        250
+      ],
+      "size": [
+        100,
+        44
+      ]
+    },
+    {
+      "id": "invoicectrl",
+      "type": "backend",
+      "label": "InvoiceCtrl",
+      "sublabel": "@RestCtrl",
+      "pos": [
+        740,
+        335
+      ],
+      "size": [
+        110,
+        44
+      ],
+      "tag": "/api/invoices"
+    },
+    {
+      "id": "invoicesvc",
+      "type": "backend",
+      "label": "InvoiceSvc",
+      "sublabel": "@Service",
+      "pos": [
+        890,
+        335
+      ],
+      "size": [
+        100,
+        44
+      ]
+    },
+    {
+      "id": "invoicerepo",
+      "type": "backend",
+      "label": "InvoiceRepo",
+      "sublabel": "JpaRepo",
+      "pos": [
+        1030,
+        335
+      ],
+      "size": [
+        100,
+        44
+      ]
+    },
+    {
+      "id": "invoiceentity",
+      "type": "database",
+      "label": "Invoice",
+      "sublabel": "invoices",
+      "pos": [
+        1170,
+        335
+      ],
+      "size": [
+        100,
+        44
+      ]
+    },
+    {
+      "id": "db",
+      "type": "database",
+      "label": "SQL Server",
+      "sublabel": "namtrung_db",
+      "pos": [
+        1170,
+        420
+      ],
+      "size": [
+        100,
+        52
+      ],
+      "tag": "ddl:update"
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Frontend",
+      "wraps": [
+        "vite",
+        "app",
+        "sidebar",
+        "sections",
+        "apiclient"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Backend",
+      "wraps": [
+        "webconfig",
+        "springboot",
+        "productctrl",
+        "importctrl",
+        "exportctrl",
+        "invoicectrl",
+        "productsvc",
+        "importsvc",
+        "exportsvc",
+        "invoicesvc",
+        "productrepo",
+        "importrepo",
+        "exportrepo",
+        "invoicerepo",
+        "productentity",
+        "importentity",
+        "exportentity",
+        "invoiceentity",
+        "db"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "bv",
+      "from": "browser",
+      "to": "vite",
+      "label": "HTTP",
+      "variant": "emphasis"
+    },
+    {
+      "id": "va",
+      "from": "vite",
+      "to": "app"
+    },
+    {
+      "id": "as",
+      "from": "app",
+      "to": "sidebar",
+      "label": "nav",
+      "fromSide": "top",
+      "toSide": "bottom",
+      "labelDx": -28
+    },
+    {
+      "id": "asec",
+      "from": "app",
+      "to": "sections",
+      "label": "render",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelDx": -28,
+      "labelDy": 24
+    },
+    {
+      "id": "sapi",
+      "from": "sections",
+      "to": "apiclient",
+      "label": "CRUD",
+      "fromSide": "right",
+      "toSide": "bottom"
+    },
+    {
+      "id": "aps",
+      "from": "apiclient",
+      "to": "springboot",
+      "variant": "emphasis",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "acors",
+      "from": "apiclient",
+      "to": "webconfig",
+      "label": "CORS",
+      "variant": "security",
+      "fromSide": "right",
+      "toSide": "bottom"
+    },
+    {
+      "id": "bpc",
+      "from": "springboot",
+      "to": "productctrl"
+    },
+    {
+      "id": "bic",
+      "from": "springboot",
+      "to": "importctrl"
+    },
+    {
+      "id": "bec",
+      "from": "springboot",
+      "to": "exportctrl"
+    },
+    {
+      "id": "binc",
+      "from": "springboot",
+      "to": "invoicectrl"
+    },
+    {
+      "id": "pcs",
+      "from": "productctrl",
+      "to": "productsvc"
+    },
+    {
+      "id": "psr",
+      "from": "productsvc",
+      "to": "productrepo"
+    },
+    {
+      "id": "pre",
+      "from": "productrepo",
+      "to": "productentity"
+    },
+    {
+      "id": "ics",
+      "from": "importctrl",
+      "to": "importsvc"
+    },
+    {
+      "id": "isr",
+      "from": "importsvc",
+      "to": "importrepo"
+    },
+    {
+      "id": "ire",
+      "from": "importrepo",
+      "to": "importentity"
+    },
+    {
+      "id": "ecs",
+      "from": "exportctrl",
+      "to": "exportsvc"
+    },
+    {
+      "id": "esr",
+      "from": "exportsvc",
+      "to": "exportrepo"
+    },
+    {
+      "id": "ere",
+      "from": "exportrepo",
+      "to": "exportentity"
+    },
+    {
+      "id": "incs",
+      "from": "invoicectrl",
+      "to": "invoicesvc"
+    },
+    {
+      "id": "insr",
+      "from": "invoicesvc",
+      "to": "invoicerepo"
+    },
+    {
+      "id": "inre",
+      "from": "invoicerepo",
+      "to": "invoiceentity"
+    },
+    {
+      "id": "inedb",
+      "from": "invoiceentity",
+      "to": "db",
+      "label": "JPA",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelDy": 24
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Frontend",
+      "items": [
+        "Vite :5173 proxy /api",
+        "App.jsx state+routing",
+        "6 sections",
+        "api.js fetch CRUD"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Backend",
+      "items": [
+        "Spring Boot :8080",
+        "WebConfig CORS",
+        "4 modules",
+        "Ctrl->Svc->Repo->Entity"
+      ]
+    },
+    {
+      "dot": "violet",
+      "title": "Database",
+      "items": [
+        "namtrung_db",
+        "ddl:update",
+        "4 tables",
+        "JpaRepository"
+      ]
+    }
+  ]
+}

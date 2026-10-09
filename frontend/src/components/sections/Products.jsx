@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { api } from '../../api';
+import { formatAmount, getStockStatus } from '../../utils';
 
 export default function Products() {
   const [products, setProducts] = useState([]);
@@ -7,18 +8,6 @@ export default function Products() {
   useEffect(() => {
     api.getProducts().then(setProducts).catch(console.error);
   }, []);
-
-  function formatPrice(val) {
-    if (val == null) return '--';
-    return val.toLocaleString('vi-VN') + 'đ';
-  }
-
-  function getStatus(stock) {
-    if (stock <= 0) return <span className="status danger">Hết hàng</span>;
-    if (stock <= 5) return <span className="status danger">Sắp hết</span>;
-    if (stock <= 10) return <span className="status warning">Thấp</span>;
-    return <span className="status done">Còn hàng</span>;
-  }
 
   function handleDelete(id) {
     if (!confirm('Xóa sản phẩm này?')) return;
@@ -49,10 +38,10 @@ export default function Products() {
                 <td>{p.sku}</td>
                 <td>{p.name}</td>
                 <td>{p.category}</td>
-                <td>{formatPrice(p.importPrice)}</td>
-                <td>{formatPrice(p.salePrice)}</td>
+                <td>{formatAmount(p.importPrice)}</td>
+                <td>{formatAmount(p.salePrice)}</td>
                 <td>{p.stock}</td>
-                <td>{getStatus(p.stock)}</td>
+                <td>{getStockStatus(p.stock)}</td>
                 <td className="action-btns">
                   <button className="btn-icon view"><i className="fa-solid fa-eye"></i></button>
                   <button className="btn-icon edit"><i className="fa-solid fa-pen"></i></button>
